@@ -28,4 +28,4 @@ jobs:
     # Runs a single command using the runners shell
     - name: Send greeting
       shell: bash
-      run: ls
+      run: echo `ls`
