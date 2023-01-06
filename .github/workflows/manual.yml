@@ -27,6 +27,6 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      working-directory: src/github.com/sfeng1996/basefs
+      working-directory: github.com/sfeng1996/basefs
       shell: bash
       run: ./auto-build.sh --k8s-version=v1.22.17 --cri=docker
