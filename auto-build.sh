@@ -107,6 +107,6 @@ if [[ "$push" == "true" ]]; then
   fi
   export SKIP_TLS_VERIFY=false
   sudo ./sealer save "${buildName}" -o kubernetes.tar
-  sudo sshpass -p SFeng1996 scp ./kubernetes.tar root@101.35.194.194:/root
+#   sudo sshpass -p SFeng1996 scp ./kubernetes.tar root@101.35.194.194:/root
   sudo ./sealer push "${buildName}" -d
 fi
