@@ -105,6 +105,6 @@ if [[ "$push" == "true" ]]; then
   if [[ -n "$username" ]] && [[ -n "$password" ]]; then
     sudo ./sealer login docker.io -u sfeng1996 -p sfeng19960921
   fi
-  export SKIP_TLS_VERIFY=true
+  export SKIP_TLS_VERIFY=false
   sudo ./sealer push "${buildName}"
 fi
