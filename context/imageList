@@ -1,4 +1,4 @@
-docker.io/fanux/lvscare:latest
+fanux/lvscare:latest
 
 quay.io/tigera/operator:v1.25.3
 calico/node:v3.22.1
