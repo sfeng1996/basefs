@@ -87,7 +87,7 @@ sudo chmod +x version.sh download.sh && export kube_install_version="$k8s_versio
 ./download.sh "${cri}"
 
 sudo chmod +x amd64/bin/kube* && sudo chmod +x arm64/bin/kube*
-sudo wget "https://github.com/sealerio/sealer/releases/download/v0.9.0/sealer-v0.9.0-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.9.0-linux-${ARCH}.tar.gz"
+sudo wget "https://github.com/sealerio/sealer/releases/download/v0.8.7/sealer-v0.8.7-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.8.7-linux-${ARCH}.tar.gz"
 sudo sed -i "s/v1.19.8/$k8s_version/g" rootfs/etc/kubeadm.yml ##change k8s_version
 if [[ "$cri" == "containerd" ]]; then sudo sed -i "s/\/var\/run\/dockershim.sock/\/run\/containerd\/containerd.sock/g" rootfs/etc/kubeadm.yml; fi
 sudo sed -i "s/kubeadm.k8s.io\/v1beta2/$kubeadmApiVersion/g" rootfs/etc/kubeadm.yml
@@ -104,12 +104,12 @@ sudo sed -i "s/v1.19.8/${k8s_version}/g" {arm64,amd64}/etc/Metadata
 sudo ./sealer build -t "${buildName}" -f Kubefile --platform "${platform}" .
 if [[ "$push" == "true" ]]; then
   if [[ -n "$username" ]] && [[ -n "$password" ]]; then
-    sudo wget "https://github.com/sealerio/sealer/releases/download/v0.8.7/sealer-v0.8.7-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.8.7-linux-${ARCH}.tar.gz"
+#     sudo wget "https://github.com/sealerio/sealer/releases/download/v0.8.7/sealer-v0.8.7-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.8.7-linux-${ARCH}.tar.gz"
     sudo ./sealer login docker.io -u sfeng1996 -p sfeng19960921
   fi
   export SKIP_TLS_VERIFY=false
-  sudo wget "https://github.com/sealerio/sealer/releases/download/v0.9.0/sealer-v0.9.0-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.9.0-linux-${ARCH}.tar.gz"
+#   sudo wget "https://github.com/sealerio/sealer/releases/download/v0.9.0/sealer-v0.9.0-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.9.0-linux-${ARCH}.tar.gz"
   sudo ./sealer save "${buildName}" -o kubernetes.tar
-#   sudo sshpass -p SFeng1996 scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
-  sudo ./sealer push "${buildName}" -d
+  sudo sshpass -p SFeng1996 scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
+#   sudo ./sealer push "${buildName}" -d
 fi
