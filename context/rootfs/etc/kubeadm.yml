@@ -44,7 +44,7 @@ controllerManager:
       readOnly: true
 dns:
   type: ""
-  imageRepository: sea.hub:5000/coredns
+  #imageRepository: sea.hub:5000/coredns
 etcd:
   local:
     dataDir: ""
