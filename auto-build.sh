@@ -93,9 +93,9 @@ if [[ "$cri" == "containerd" ]]; then sudo sed -i "s/\/var\/run\/dockershim.sock
 sudo sed -i "s/kubeadm.k8s.io\/v1beta2/$kubeadmApiVersion/g" rootfs/etc/kubeadm.yml
 sudo ./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml"
 sudo ./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml" 2>/dev/null | sed "/WARNING/d" >>imageList
-sudo sed -i "s#k8s.gcr.io/coredns#k8s.gcr.io/coredns/coredns#g" imageList
+# sudo sed -i "s#k8s.gcr.io/coredns#k8s.gcr.io/coredns/coredns#g" imageList
 #if [ "$(sudo ./"${ARCH}"/bin/kubeadm config images list --config rootfs/etc/kubeadm.yml 2>/dev/null | grep -c "coredns/coredns")" -gt 0 ]; then sudo sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml; fi
-sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml
+#sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml
 sudo sed -i "s/k8s.gcr.io/sea.hub:5000/g" rootfs/etc/kubeadm.yml
 pauseImage=$(./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml" 2>/dev/null | sed "/WARNING/d" | grep pause)
 if [ -f "rootfs/etc/dump-config.toml" ]; then sudo sed -i "s/sea.hub:5000\/pause:3.6/$(echo "$pauseImage" | sed 's/\//\\\//g')/g" rootfs/etc/dump-config.toml; fi
