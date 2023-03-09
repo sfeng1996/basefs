@@ -1,5 +1,4 @@
 fanux/lvscare:latest
-
 quay.io/tigera/operator:v1.25.3
 calico/node:v3.22.1
 calico/pod2daemon-flexvol:v3.22.1
