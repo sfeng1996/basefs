@@ -93,13 +93,13 @@ if [[ "$cri" == "containerd" ]]; then sudo sed -i "s/\/var\/run\/dockershim.sock
 sudo sed -i "s/kubeadm.k8s.io\/v1beta2/$kubeadmApiVersion/g" rootfs/etc/kubeadm.yml
 sudo ./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml"
 sudo ./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml" 2>/dev/null | sed "/WARNING/d" >>imageList
-# sudo sed -i "s#k8s.gcr.io/coredns#k8s.gcr.io/coredns/coredns#g" imageList
+sudo sed -i "s#k8s.gcr.io/coredns#k8s.gcr.io/coredns/coredns#g" imageList
 #if [ "$(sudo ./"${ARCH}"/bin/kubeadm config images list --config rootfs/etc/kubeadm.yml 2>/dev/null | grep -c "coredns/coredns")" -gt 0 ]; then sudo sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml; fi
-#sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml
+sudo sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml
 sudo sed -i "s/k8s.gcr.io/sea.hub:5000/g" rootfs/etc/kubeadm.yml
 pauseImage=$(./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml" 2>/dev/null | sed "/WARNING/d" | grep pause)
 if [ -f "rootfs/etc/dump-config.toml" ]; then sudo sed -i "s/sea.hub:5000\/pause:3.6/$(echo "$pauseImage" | sed 's/\//\\\//g')/g" rootfs/etc/dump-config.toml; fi
-sudo sed -i "s/v1.19.8/${k8s_version}/g" {arm64,amd64}/etc/Metadata
+sudo sed -i "s/v1.19.8/${k8s_version}/g" {arm64,amd64}/Metadata
 ##linux/arm64,linux/amd64
 sudo ./sealer build -t "${buildName}" -f Kubefile --platform "${platform}" .
 if [[ "$push" == "true" ]]; then
@@ -110,6 +110,6 @@ if [[ "$push" == "true" ]]; then
   export SKIP_TLS_VERIFY=false
 #   sudo wget "https://github.com/sealerio/sealer/releases/download/v0.9.0/sealer-v0.9.0-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.9.0-linux-${ARCH}.tar.gz"
   sudo ./sealer save "${buildName}" -o kubernetes.tar
-  sudo sshpass -p xxxxxx scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
+  sudo sshpass -p SFeng1996 scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
 #   sudo ./sealer push "${buildName}" -d
 fi
