@@ -2,3 +2,6 @@ FROM scratch
 COPY rootfs/* .
 COPY ${ARCH}/* . 
 COPY imageList manifests/
+
+CMD kubectl apply -f etc/tigera-operator.yaml
+CMD kubectl apply -f etc/custom-resources.yaml
