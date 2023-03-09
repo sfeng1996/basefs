@@ -105,13 +105,12 @@ sudo sed -i "s/v1.19.8/${k8s_version}/g" {arm64,amd64}/etc/Metadata
 ##linux/arm64,linux/amd64
 sudo ./sealer build -t "${buildName}" -f Kubefile --platform "${platform}" .
 if [[ "$push" == "true" ]]; then
-#  if [[ -n "$username" ]] && [[ -n "$password" ]]; then
-##     sudo wget "https://github.com/sealerio/sealer/releases/download/v0.8.7/sealer-v0.8.7-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.8.7-linux-${ARCH}.tar.gz"
-#    sudo ./sealer login docker.io -u sfeng1996 -p sfeng19960921
-#  fi
-#  export SKIP_TLS_VERIFY=false
-#   sudo wget "https://github.com/sealerio/sealer/releases/download/v0.9.0/sealer-v0.9.0-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.9.0-linux-${ARCH}.tar.gz"
+  if [[ -n "$username" ]] && [[ -n "$password" ]]; then
+    sudo ./sealer login docker.io -u $username -p $password
+  fi
+  export SKIP_TLS_VERIFY=false
+  sudo ./sealer push "${buildName}" -d
   sudo ./sealer save "${buildName}" -o kubernetes.tar
   # sudo sshpass -p xxxx scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
-#   sudo ./sealer push "${buildName}" -d
+
 fi
