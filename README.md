@@ -39,7 +39,7 @@ auto-build --k8s-version=v1.22.8
 This will build a Clusterimage with amd64 platform, default is linux/amd64,linux/arm64.
 
 ```shell
-auto-build --k8s-version=v1.22.8 --platform=amd64
+bash auto-build.sh --k8s-version=v1.22.17 --cri=docker --buildName=docker.io/moss-public/kubernetes:v1.22.17 --username=xxx --password=xxx --platform=linux/amd64 --push
 ```
 
 ### build with specified name

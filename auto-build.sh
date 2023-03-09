@@ -112,6 +112,6 @@ if [[ "$push" == "true" ]]; then
 #  export SKIP_TLS_VERIFY=false
 #   sudo wget "https://github.com/sealerio/sealer/releases/download/v0.9.0/sealer-v0.9.0-linux-${ARCH}.tar.gz" && sudo tar -xvf "sealer-v0.9.0-linux-${ARCH}.tar.gz"
   sudo ./sealer save "${buildName}" -o kubernetes.tar
-  sudo sshpass -p SFeng1996 scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
+  # sudo sshpass -p xxxx scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
 #   sudo ./sealer push "${buildName}" -d
 fi
