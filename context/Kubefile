@@ -1,4 +1,4 @@
-FROM scratch
+FROM docker.io/sfeng1996/kubernetes:v1.22.17
 COPY rootfs/* .
 COPY ${ARCH}/* . 
 COPY imageList manifests/
