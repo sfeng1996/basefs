@@ -94,7 +94,7 @@ sudo sed -i "s/kubeadm.k8s.io\/v1beta2/$kubeadmApiVersion/g" rootfs/etc/kubeadm.
 sudo ./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml"
 sudo echo " " >> imageList
 sudo ./"${ARCH}"/bin/kubeadm config images list --config "rootfs/etc/kubeadm.yml" 2>/dev/null | sed "/WARNING/d" >>imageList
-sudo sed -i "s#registry.k8s.io/coredns#registry.k8s.io/coredns/coredns#g" imageList
+#sudo sed -i "s#registry.k8s.io/coredns#registry.k8s.io/coredns/coredns#g" imageList
 #if [ "$(sudo ./"${ARCH}"/bin/kubeadm config images list --config rootfs/etc/kubeadm.yml 2>/dev/null | grep -c "coredns/coredns")" -gt 0 ]; then sudo sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml; fi
 sudo sed -i "s/#imageRepository/imageRepository/g" rootfs/etc/kubeadm.yml
 sudo sed -i "s/registry.k8s.io/sea.hub:5000/g" rootfs/etc/kubeadm.yml
