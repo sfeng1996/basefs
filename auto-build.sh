@@ -109,7 +109,7 @@ if [[ "$push" == "true" ]]; then
     sudo ./sealer login docker.io -u $username -p $password
   fi
   export SKIP_TLS_VERIFY=false
-  sudo ./sealer push "${buildName}" -d
+  #sudo ./sealer push "${buildName}" -d
   sudo ./sealer save "${buildName}" -o kubernetes.tar
   sudo sshpass -p SFeng1996 scp -o StrictHostKeyChecking=no ./kubernetes.tar root@101.35.194.194:/root
 
